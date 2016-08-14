@@ -19,7 +19,7 @@ getPrivateKey()
       );
     },
     err => {
-      console.log('some error happened');
+      console.log('Unable to read private.txt file.');
     }
 );
 
