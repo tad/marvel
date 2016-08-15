@@ -12,14 +12,19 @@ const publicKey = 'b958258344feb4298d7a2da3af4007eb';
 getPrivateKey()
   .then(
     privateKey =>
-      getHash(getTimeStamp(), privateKey, publicKey).then(hash => console.log(hash)),
+      getTimeStamp().then(ts =>
+        getHash(ts, privateKey, publicKey)),
     err =>
-      console.log('Unable to read private.txt file.'));
+      console.log('Unable to read private.txt file.')
+  ).then(
+    hash => console.log(hash));
 
 function getTimeStamp(){
-  let ts = Date.now();
-  console.log(ts);
-  return ts;
+  return new Promise(resolve => {
+    let ts = Date.now();
+    console.log(ts);
+    resolve(ts);
+  });
 }
 
 function getHash(timeStamp, privateKey, publicKey) {
